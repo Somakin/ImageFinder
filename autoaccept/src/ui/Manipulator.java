@@ -22,7 +22,7 @@ public class Manipulator {
         int[] koordinate = new int[2];
         int bild_start = 0;
         boolean erste = false;
-        boolean falseBild = false;
+        boolean falschesBild = false;
         
 
         while(true){
