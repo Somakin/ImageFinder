@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
@@ -19,8 +21,8 @@ public class Programm {
         AutoAction aa = new AutoAction();
         // import images
 
-        
-        BufferedImage bild = ImageIO.read(new File("C:\\stuff.tower\\code\\newApp\\autoaccept\\src\\bilder\\Test.png"));
+        Path file = Paths.get("autoaccept/src/bilder/Test.png");
+        BufferedImage bild = ImageIO.read(file.toFile());
 
         BufferedImage screenShot = robot
                 .createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
