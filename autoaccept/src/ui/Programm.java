@@ -27,11 +27,11 @@ public class Programm {
                 .createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
 
         // convert to pixel array
-        
+
         int[] b = manipulator.pixels(bild);
-        int[] b2 = new int [bild.getWidth()];
+        int[] b2 = new int[bild.getWidth()];
         for (int i = 0; i < b2.length; i++) {
-            b2[i]=b[i];
+            b2[i] = b[i];
         }
 
         boolean bool = true;
@@ -39,20 +39,18 @@ public class Programm {
 
             // screenshot aktualisieren
             screenShot = robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-            
+
             // convert to pixel array
             int[] a = manipulator.pixels(screenShot);
 
-            // ImageIO.write(screenShot, "JPG", new File("src\\ui\\Screenshot" + ".jpg"));
-            // manipulator.compare3(a, b2, b, screenShot, bild);
-            
-            if (aa.klick(manipulator.compare(a, b, screenShot, bild))){
+            // check for Image
+            if (aa.klick(manipulator.compare(a, b, screenShot, bild))) {
                 System.out.println("bild gefunden");
                 System.exit(0);
             }
-          
-            //Thread.sleep(3000);
-            
+
+            // Thread.sleep(3000);
+
         }
 
     }
