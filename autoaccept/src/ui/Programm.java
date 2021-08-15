@@ -45,8 +45,9 @@ public class Programm {
 
             // ImageIO.write(screenShot, "JPG", new File("src\\ui\\Screenshot" + ".jpg"));
             // manipulator.compare3(a, b2, b, screenShot, bild);
-            aa.klick(manipulator.compare(a, b, screenShot, bild));
-            if (manipulator.compare(a, b, screenShot, bild)[0] > 0){
+            
+            if (aa.klick(manipulator.compare(a, b, screenShot, bild))){
+                System.out.println("bild gefunden");
                 System.exit(0);
             }
           

@@ -5,7 +5,7 @@ import java.awt.Robot;
 
 public class AutoAction {
 
-    public void klick(int[] xyPosition)throws Exception{
+    public boolean klick(int[] xyPosition)throws Exception{
 
         int x = xyPosition[0];
         int y = xyPosition[1];
@@ -15,8 +15,9 @@ public class AutoAction {
         bot.mouseMove(x, y);
         bot.mousePress(mask);     
         bot.mouseRelease(mask);
+        return true;
         }
-        
+        return false;
     }
     
 }

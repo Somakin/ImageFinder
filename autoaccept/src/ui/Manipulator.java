@@ -25,8 +25,7 @@ public class Manipulator {
 
         int richtige = 0;
         int fehler = 0;
-        double maxfehler = (int) rPixels.length*0.1;//zugelassene Fehler = 10 %
-        
+        double maxfehler = (int) rPixels.length * 0.1; // zugelassene Fehler in %
 
         boolean istgleich = false;
 
@@ -37,36 +36,35 @@ public class Manipulator {
             xlage = 0;
             ylage = 0;
             fehler = 0;
-            
+
             if (i == (scPixels.length - (sc.getWidth() * r.getHeight())) - 1) {
-                System.out.println("bild nicht gefunden");
+                
                 koordinaten[0] = 0;
                 koordinaten[1] = 0;
                 return koordinaten;
             } else if (scPixels[i] == rPixels[xlage]) {
-                //System.out.println("start i: " + i);
+                // System.out.println("start i: " + i);
                 istgleich = true;
                 while (ylage < r.getHeight() && istgleich) {
                     while (xlage < r.getWidth() && istgleich) {
-                        if (richtige >= rPixels.length - 1-(int)maxfehler) {
-                            System.out.println("bild gefunden");
+                        if (richtige >= rPixels.length - 1 - (int) maxfehler) {
+                            
                             koordinaten[0] = i % sc.getWidth();
                             koordinaten[1] = (i - koordinaten[0]) / sc.getWidth();
                             // koordinaten anpassen
                             koordinaten[0] = koordinaten[0] + r.getWidth() / 2;
                             koordinaten[1] = koordinaten[1] + r.getHeight() / 2;
                             return koordinaten;
-                        }else if ((scPixels[i + xlage + ylage * sc.getWidth()] != rPixels[xlage
-                        + ylage * r.getWidth()]) &&  fehler <= (int)maxfehler){
+                        } else if ((scPixels[i + xlage + ylage * sc.getWidth()] != rPixels[xlage
+                                + ylage * r.getWidth()]) && fehler <= (int) maxfehler) {
                             fehler++;
                             richtige++;
-                        }
-                         else if ((scPixels[i + xlage + ylage * sc.getWidth()] != rPixels[xlage
-                                + ylage * r.getWidth()]) &&  fehler > (int)maxfehler) {
+                        } else if ((scPixels[i + xlage + ylage * sc.getWidth()] != rPixels[xlage
+                                + ylage * r.getWidth()]) && fehler > (int) maxfehler) {
                             istgleich = false;
                         } else {
                             richtige++;
-                            //System.out.println("anzahl richtige= " + richtige);
+                            // System.out.println("anzahl richtige= " + richtige);
 
                         }
 
