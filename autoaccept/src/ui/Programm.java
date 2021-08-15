@@ -5,7 +5,6 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
