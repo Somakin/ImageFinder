@@ -17,131 +17,64 @@ public class Manipulator {
         return pixels;
     }
 
-    public int[] compare(int[] scPixels, int[] rPixels_1, int[] rPixels_ganz, BufferedImage sc, BufferedImage r) {
-        int[] koordinate = new int[2];
-        int bild_start = 0;
-        boolean erste = false;
-        boolean falschesBild = false;
+    public int[] compare(int[] scPixels, int[] rPixels, BufferedImage sc, BufferedImage r) {
+        int[] koordinaten = new int[2];
 
-        while (true) {
-            for (int i = bild_start; i < scPixels.length - rPixels_1.length; i++) {
-                if (erste) {
-                    break;
-                }
-                if (i == scPixels.length - rPixels_1.length - 1) {
-                    koordinate[0] = 0;
-                    koordinate[1] = 0;
-                    return koordinate;
-                }
-                if (!erste) {
-                    for (int j = 0; j < rPixels_1.length; j++) {
-                        if (j == rPixels_1.length - 1) {
-                            // erste Reihe gefunden
-                            koordinate[0] = i % sc.getWidth();
-                            koordinate[1] = (i - koordinate[0]) / sc.getWidth();
-                            bild_start = i;
+        int xlage = 0;
+        int ylage = 0;
 
-                            erste = true;
-                            System.out.println("erste Reihe gefunden");
-                            // koordinaten in die Mitte verstellen
-                            koordinate[0] = i % sc.getWidth() + r.getWidth() / 2;
-                            koordinate[1] = (i - koordinate[0]) / sc.getWidth() + r.getHeight() / 2;
+        int richtige = 0;
 
-                            break;
+        boolean istgleich = false;
 
-                        } else if (scPixels[i + j] == rPixels_1[j]) {
+        for (int i = 0; i < scPixels.length - (sc.getWidth() * r.getHeight()); i++) {
+
+            istgleich = false;
+            richtige = 0;
+            xlage = 0;
+            ylage = 0;
+            if (i == (scPixels.length - (sc.getWidth() * r.getHeight())) - 1) {
+                System.out.println("bild nicht gefunden");
+                koordinaten[0] = 0;
+                koordinaten[1] = 0;
+                return koordinaten;
+            } else if (scPixels[i] == rPixels[xlage]) {
+                //System.out.println("start i: " + i);
+                istgleich = true;
+                while (ylage < r.getHeight() && istgleich) {
+                    while (xlage < r.getWidth() && istgleich) {
+                        if (richtige == rPixels.length - 1) {
+                            System.out.println("bild gefunden");
+                            koordinaten[0] = i % sc.getWidth();
+                            koordinaten[1] = (i - koordinaten[0]) / sc.getWidth();
+                            // koordinaten anpassen
+                            koordinaten[0] = koordinaten[0] + r.getWidth() / 2;
+                            koordinaten[1] = koordinaten[1] + r.getHeight() / 2;
+                            return koordinaten;
+                        } else if (scPixels[i + xlage + ylage * sc.getWidth()] != rPixels[xlage
+                                + ylage * r.getWidth()]) {
+                            istgleich = false;
                         } else {
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (erste) {
-
-                for (int x = 0; x < r.getWidth(); x++) {
-                    if (!falschesBild) {
-
-                        for (int y = 1; y < r.getHeight(); y++) {
-
-                            if (x == r.getWidth() - 1) {
-                                // Bild ganz gefunden
-                                System.out.println("Bild gefunden!");
-                                // koordinaten zurückgeben
-                                return koordinate;
-                            }
-
-                            else if (scPixels[bild_start + x + y * sc.getWidth()] == rPixels_ganz[x
-                                    + y * r.getWidth()]) {
-
-                            } else {
-                                // auf 2D ebene nicht richtiges Bild
-                                System.out.println("falsches 2 D bild");
-                                falschesBild = true;
-
-                                break;
-                            }
+                            richtige++;
+                            //System.out.println("anzahl richtige= " + richtige);
 
                         }
-                    }
 
-                    else {
-                        falschesBild = false;
-                        erste = false;
-                        break;
+                        xlage++;
                     }
+                    xlage = 0;
+                    ylage++;
 
                 }
+
             }
 
         }
-    }
 
-    public int[] compare2(int[] scPixels, int[] rPixels, BufferedImage sc, BufferedImage r) {
-        int zähler1 = 0;
-        boolean bildnichtgefunden = true;
-        boolean abbruch = false;
-        int[] koordinate = new int[2];
-        while (zähler1 < scPixels.length && bildnichtgefunden) {
-            for (int i = 0; i < scPixels.length; i++) {
-                for (int x = 0; x < r.getWidth(); x++) {
-                    if (abbruch) {
-                        abbruch = false;
-                        break;
-                    }
-                    for (int y = 0; y < r.getHeight(); y++) {
+        koordinaten[0] = 0;
+        koordinaten[1] = 0;
+        return koordinaten;
 
-                        if (scPixels[i + x + y * sc.getWidth()] == rPixels[x + y * r.getWidth()]) {
-                            if (y == r.getWidth() - 1) {
-                                // Bild gefunden
-                                System.out.println("bild gefunden");
-                                bildnichtgefunden = false;
-                                // koordinaten
-                                koordinate[0] = i % sc.getWidth() + x;
-                                koordinate[1] = (i - koordinate[0]) / sc.getWidth() + y;
-
-                                // koordinaten mitteln
-                                koordinate[0] = koordinate[0] + r.getWidth() / 2;
-                                koordinate[1] = koordinate[1] + r.getHeight() / 2;
-                                return koordinate;
-
-                            } else {
-                                abbruch = true;
-                                break;
-                            }
-                        }
-
-                    }
-                }
-
-            }
-          zähler1 ++;
-          
-        }
-        System.out.println("bild nicht gefunden");
-        koordinate[0] = 0;
-        koordinate[1] = 0;
-        return koordinate;
     }
 
 }
