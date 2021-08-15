@@ -20,7 +20,7 @@ public class Programm {
         AutoAction aa = new AutoAction();
         // import images
 
-        Path file = Paths.get("autoaccept/src/bilder/Test.png");
+        Path file = Paths.get("src/bilder/Test.png");
         BufferedImage bild = ImageIO.read(file.toFile());
 
         BufferedImage screenShot = robot
@@ -29,15 +29,7 @@ public class Programm {
         // convert to pixel array
         
         int[] b = manipulator.pixels(bild);
-        int[] b2 = new int[bild.getWidth()];
- 
 
-        
-        for (int i = 0; i < b2.length; i++) {
-            b2[i] = b[i];
-            
-        
-    }
 
         boolean bool = true;
         while (bool) {
@@ -50,7 +42,7 @@ public class Programm {
 
             // ImageIO.write(screenShot, "JPG", new File("src\\ui\\Screenshot" + ".jpg"));
             // manipulator.compare3(a, b2, b, screenShot, bild);
-            aa.klick(manipulator.compare(a, b2, b, screenShot, bild));
+            aa.klick(manipulator.compare2(a, b, screenShot, bild));
           
             Thread.sleep(3000);
         }
