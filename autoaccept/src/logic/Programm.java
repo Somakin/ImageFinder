@@ -46,10 +46,10 @@ public class Programm {
             // check for Image
             if (aa.klick(manipulator.compare(a, b, screenShot, bild))) {
                 System.out.println("bild gefunden");
-                System.exit(0);
+                bool = false;
             }
 
-            // Thread.sleep(3000);
+             Thread.sleep(1000);
 
         }
 

@@ -1,12 +1,13 @@
 package app;
 
-import javafx.scene.layout.HBox;
 
-public class ApplicationUI extends HBox{
+import javafx.scene.layout.VBox;
+
+public class ApplicationUI extends VBox{
     
 
-    VBox1 vBox1;
-    VBox1 vBox2;
+    HBox1 HBox1;
+    HBox2 Title;
 
     public ApplicationUI(){
 
@@ -19,13 +20,13 @@ public class ApplicationUI extends HBox{
 
     private void layoutControls() {
 
-        getChildren().addAll(vBox1,vBox2);
+        getChildren().addAll(Title,HBox1);
     }
 
     private void initializeControls() {
 
-        vBox1 = new VBox1();
-        vBox2 = new VBox1();
+        HBox1 = new HBox1();
+        Title = new HBox2();
 
     }
 }
