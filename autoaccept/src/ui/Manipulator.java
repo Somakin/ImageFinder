@@ -18,14 +18,16 @@ public class Manipulator {
     }
 
     public int[] compare(int[] scPixels, int[] rPixels_1, int[] rPixels_ganz, BufferedImage sc, BufferedImage r) {
-        int i_start = 0;
         int[] koordinate = new int[2];
         int bild_start = 0;
         boolean erste = false;
         boolean falschesBild = false;
 
         while (true) {
-            for (int i = i_start; i < scPixels.length - rPixels_1.length; i++) {
+            for (int i = bild_start; i < scPixels.length - rPixels_1.length; i++) {
+                if (erste) {
+                    break;
+                }
                 if (i == scPixels.length - rPixels_1.length - 1) {
                     koordinate[0] = 0;
                     koordinate[1] = 0;
@@ -60,11 +62,11 @@ public class Manipulator {
                 for (int x = 0; x < r.getWidth(); x++) {
                     if (!falschesBild) {
 
-                        for (int y = 1; y > r.getHeight(); y++) {
-                            System.out.println("pixel am vergleichen");
-                            if (y == r.getWidth() - 1) {
-                                // Bild ganz gefunden
+                        for (int y = 1; y < r.getHeight(); y++) {
 
+                            if (x == r.getWidth() - 1) {
+                                // Bild ganz gefunden
+                                System.out.println("Bild gefunden!");
                                 // koordinaten zurückgeben
                                 return koordinate;
                             }
@@ -82,6 +84,12 @@ public class Manipulator {
 
                         }
                     }
+
+                    falschesBild = true;
+                    erste = false;
+
+                    break;
+
                 }
             }
 
