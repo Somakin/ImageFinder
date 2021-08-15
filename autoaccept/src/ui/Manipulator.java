@@ -23,75 +23,67 @@ public class Manipulator {
         int bild_start = 0;
         boolean erste = false;
         boolean falschesBild = false;
-        
 
-        while(true){
-        for (int i = i_start; i < scPixels.length - rPixels_1.length; i++) {
-            if(i == scPixels.length - rPixels_1.length-1){
-                koordinate[0]=0;
-                koordinate[1]=0;
-                return koordinate;
-            }
-            if (!erste) {
-                for (int j = 0; j < rPixels_1.length; j++) {
-                    if (j == rPixels_1.length - 1) {
-                        // erste Reihe gefunden
-                        koordinate[0] = i % sc.getWidth();
-                        koordinate[1] = (i - koordinate[0]) / sc.getWidth();
-                        bild_start = i;
-                        
-                        erste = true;
-                        System.out.println("erste Reihe gefunden");
-                        // koordinaten in die Mitte verstellen
-                        koordinate[0] = i % sc.getWidth() + r.getWidth() / 2;
-                        koordinate[1] = (i - koordinate[0]) / sc.getWidth() + r.getHeight() / 2;
+        while (true) {
+            for (int i = i_start; i < scPixels.length - rPixels_1.length; i++) {
+                if (i == scPixels.length - rPixels_1.length - 1) {
+                    koordinate[0] = 0;
+                    koordinate[1] = 0;
+                    return koordinate;
+                }
+                if (!erste) {
+                    for (int j = 0; j < rPixels_1.length; j++) {
+                        if (j == rPixels_1.length - 1) {
+                            // erste Reihe gefunden
+                            koordinate[0] = i % sc.getWidth();
+                            koordinate[1] = (i - koordinate[0]) / sc.getWidth();
+                            bild_start = i;
 
-                        break;
+                            erste = true;
+                            System.out.println("erste Reihe gefunden");
+                            // koordinaten in die Mitte verstellen
+                            koordinate[0] = i % sc.getWidth() + r.getWidth() / 2;
+                            koordinate[1] = (i - koordinate[0]) / sc.getWidth() + r.getHeight() / 2;
 
-                    } else if (scPixels[i + j] == rPixels_1[j]) {
-                    } else {
-                        break;
+                            break;
+
+                        } else if (scPixels[i + j] == rPixels_1[j]) {
+                        } else {
+                            break;
+                        }
                     }
                 }
             }
-        }
-             
-        
+
             if (erste) {
-            
-            for (int x = 0; x < r.getWidth(); x++) {
-                if(!falschesBild){
 
-                for (int y = 1; y > r.getHeight(); y++) {
-                    if (y == r.getWidth() - 1) {
-                        // Bild ganz gefunden
-    
-                        
-    
-                        // koordinaten zurückgeben
-                        return koordinate;
-                    }
-                    
-                    else if (scPixels[bild_start + x + y * sc.getWidth()] == rPixels_ganz[x + y * r.getWidth()]) {
-                        
+                for (int x = 0; x < r.getWidth(); x++) {
+                    if (!falschesBild) {
 
-                    } else {
-                        // auf 2D ebene nicht richtiges Bild
-                        System.out.println("falsches 2 D bild");
-                        falschesBild = true;
-                        
-                        break;
-                    }
-                
-                    
+                        for (int y = 1; y > r.getHeight(); y++) {
+                            System.out.println("pixel am vergleichen");
+                            if (y == r.getWidth() - 1) {
+                                // Bild ganz gefunden
+
+                                // koordinaten zurückgeben
+                                return koordinate;
+                            }
+
+                            else if (scPixels[bild_start + x + y * sc.getWidth()] == rPixels_ganz[x
+                                    + y * r.getWidth()]) {
+
+                            } else {
+                                // auf 2D ebene nicht richtiges Bild
+                                System.out.println("falsches 2 D bild");
+                                falschesBild = true;
+
+                                break;
+                            }
+
+                        }
                     }
                 }
             }
-        }
-    
-        
-        
-
 
         }
     }
