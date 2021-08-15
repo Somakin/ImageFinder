@@ -96,4 +96,52 @@ public class Manipulator {
 
         }
     }
+
+    public int[] compare2(int[] scPixels, int[] rPixels, BufferedImage sc, BufferedImage r) {
+        int zähler1 = 0;
+        boolean bildnichtgefunden = true;
+        boolean abbruch = false;
+        int[] koordinate = new int[2];
+        while (zähler1 < scPixels.length && bildnichtgefunden) {
+            for (int i = 0; i < scPixels.length; i++) {
+                for (int x = 0; x < r.getWidth(); x++) {
+                    if (abbruch) {
+                        abbruch = false;
+                        break;
+                    }
+                    for (int y = 0; y < r.getHeight(); y++) {
+
+                        if (scPixels[i + x + y * sc.getWidth()] == rPixels[x + y * r.getWidth()]) {
+                            if (y == r.getWidth() - 1) {
+                                // Bild gefunden
+                                System.out.println("bild gefunden");
+                                bildnichtgefunden = false;
+                                // koordinaten
+                                koordinate[0] = i % sc.getWidth() + x;
+                                koordinate[1] = (i - koordinate[0]) / sc.getWidth() + y;
+
+                                // koordinaten mitteln
+                                koordinate[0] = koordinate[0] + r.getWidth() / 2;
+                                koordinate[1] = koordinate[1] + r.getHeight() / 2;
+                                return koordinate;
+
+                            } else {
+                                abbruch = true;
+                                break;
+                            }
+                        }
+
+                    }
+                }
+
+            }
+          zähler1 ++;
+          
+        }
+        System.out.println("bild nicht gefunden");
+        koordinate[0] = 0;
+        koordinate[1] = 0;
+        return koordinate;
+    }
+
 }
