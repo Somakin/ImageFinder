@@ -20,7 +20,7 @@ public class Programm {
         AutoAction aa = new AutoAction();
         // import images
 
-        Path file = Paths.get("autoaccept/src/bilder/Test.png");
+        Path file = Paths.get("autoaccept/src/bilder/Moon.png");
         BufferedImage bild = ImageIO.read(file.toFile());
 
         BufferedImage screenShot = robot
@@ -46,9 +46,12 @@ public class Programm {
             // ImageIO.write(screenShot, "JPG", new File("src\\ui\\Screenshot" + ".jpg"));
             // manipulator.compare3(a, b2, b, screenShot, bild);
             aa.klick(manipulator.compare(a, b, screenShot, bild));
+            if (manipulator.compare(a, b, screenShot, bild)[0] > 0){
+                System.exit(0);
+            }
           
-            Thread.sleep(3000);
-            bool = false;
+            //Thread.sleep(3000);
+            
         }
 
     }
