@@ -19,6 +19,7 @@ public class Programm {
         AutoAction aa = new AutoAction();
         // import images
 
+        
         BufferedImage bild = ImageIO.read(new File("C:\\stuff.tower\\code\\newApp\\autoaccept\\src\\bilder\\Test.png"));
 
         BufferedImage screenShot = robot
