@@ -20,7 +20,7 @@ public class Programm {
         AutoAction aa = new AutoAction();
         // import images
 
-        Path file = Paths.get("autoaccept/src/bilder/Find Match.png");
+        Path file = Paths.get("autoaccept/src/bilder/Test.png");
         BufferedImage bild = ImageIO.read(file.toFile());
 
         BufferedImage screenShot = robot
