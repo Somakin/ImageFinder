@@ -87,6 +87,7 @@ public class Manipulator {
 
                     else {
                         falschesBild = false;
+                        erste = false;
                         break;
                     }
 
