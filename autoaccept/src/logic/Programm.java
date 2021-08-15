@@ -20,7 +20,7 @@ public class Programm {
         AutoAction aa = new AutoAction();
         // import images
 
-        Path file = Paths.get("autoaccept/src/bilder/Moon.png");
+        Path file = Paths.get("autoaccept/src/bilder/Accept.png");
         BufferedImage bild = ImageIO.read(file.toFile());
 
         BufferedImage screenShot = robot
@@ -49,7 +49,7 @@ public class Programm {
                 bool = false;
             }
 
-             Thread.sleep(1000);
+            
 
         }
 
