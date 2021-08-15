@@ -85,10 +85,9 @@ public class Manipulator {
                         }
                     }
 
-                    falschesBild = true;
-                    erste = false;
+                   
 
-                    break;
+                    
 
                 }
             }
