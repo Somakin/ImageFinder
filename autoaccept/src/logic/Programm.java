@@ -21,14 +21,14 @@ public class Programm {
 public boolean getImagefound(){
     return this.imagefound;
 }
-    public Programm() throws Exception {
+    public Programm(String referenzBild) throws Exception {
         // objects
         this.robot = new Robot();
         this.manipulator = new Manipulator();
         this.autoaction = new AutoAction();
         // images
         this.screenshot = robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-        this.bild = ImageIO.read(Paths.get("autoaccept/src/bilder/Moon.png").toFile());
+        this.bild = ImageIO.read(Paths.get("autoaccept/src/bilder/"+referenzBild).toFile());
         // images to PixelArray
         this.scPixels = manipulator.pixels(screenshot);
         this.rPixels = manipulator.pixels(bild);
@@ -39,6 +39,14 @@ public boolean getImagefound(){
 
         // boolean constructor
         this.imagefound = false;
+    }
+    public void initialize() throws Exception{
+        // objects
+        Compare compare = new Compare(screenshot, bild, scPixels, rPixels);
+
+        this.x = compare.getX();
+        this.y = compare.getY();
+
     }
 
     public void run() throws Exception {
@@ -56,4 +64,5 @@ public boolean getImagefound(){
         }
 
     }
+    
 }

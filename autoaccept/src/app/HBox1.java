@@ -29,7 +29,7 @@ public class HBox1 extends HBox {
 
         getChildren().addAll(button1, button2, lable, button3);
     }
-
+    
     private void initializeControls() {
         button1 = new Button("Start");
         button2 = new Button("Stop");
@@ -40,6 +40,8 @@ public class HBox1 extends HBox {
             try {
                 lable.setText("searching");
                 bool = true;
+                Programm programm = new Programm("Moon.png");
+                programm.initialize();
                 foo();
                 
                 
@@ -51,7 +53,7 @@ public class HBox1 extends HBox {
         });
         
         button2.setOnAction(abbruch -> {
-            lable.setText("not searching");
+            lable.setText("stopped searching");
             bool = false;
         });
         button3.setOnAction(exit -> {
@@ -61,27 +63,31 @@ public class HBox1 extends HBox {
     }
 
     public void foo()throws Exception {
-        Thread t = new Thread(new Runnable() {
+        Thread t2 = new Thread(new Runnable() {
+            
             public void run() {
                 try {
                 
-                    Programm programm = new Programm();
-                    programm.run();
+                    Programm programm = new Programm("Moon.png");
+                    programm.initialize();
                     while (!programm.getImagefound() && bool) { //false ist wenn es das bild nicht erkannt hat
-                    Programm weitererVersuch = new Programm();
+                    Programm weitererVersuch = new Programm("Moon.png");
                     weitererVersuch.run();
-                    if(weitererVersuch.getImagefound()){ bool = false;}
+                    if(weitererVersuch.getImagefound()){ 
+                        bool = false;
+                        
+                    }
                     }
                     
 
                 } catch (Exception e) {
 
-                    lable.setText("not searching");
+                    
                 }
             }
         });
         
-        t.start();
+        t2.start();
     }
 
 }
