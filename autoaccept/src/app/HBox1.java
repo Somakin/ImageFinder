@@ -1,46 +1,84 @@
 package app;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+
 import logic.Programm;
 
 public class HBox1 extends HBox {
 
-    Button button1;
-    Button button2;
-    Programm programm = new Programm();
+    boolean bool = true;
+    
+    public Button button1;
+    public Button button2;
+    public Label lable;
+    public Button button3;
 
+    
+    
     public HBox1() {
 
         initializeControls();
         layoutControls();
+        
 
     }
 
     private void layoutControls() {
 
-        getChildren().addAll(button1, button2);
+        getChildren().addAll(button1, button2, lable, button3);
     }
 
     private void initializeControls() {
         button1 = new Button("Start");
         button2 = new Button("Stop");
+        lable = new Label("not searching");
+        button3 = new Button("Exit");
 
         button1.setOnAction(actionEvent -> {
-            Programm programm = new Programm();
-
             try {
-                programm.start();
+                lable.setText("searching");
+                bool = true;
+                foo();
+                
             } catch (Exception e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             }
 
         });
-        button2.setOnAction(actionEvent -> {
-            System.out.println("abbruch");
+        
+        button2.setOnAction(abbruch -> {
+            lable.setText("not searching");
+            bool = false;
+        });
+        button3.setOnAction(exit -> {
             System.exit(0);
         });
+
+    }
+
+    public void foo()throws Exception {
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    
+                    Programm programm = new Programm();
+                    
+                    while (!programm.isEqual() && bool) {
+                        
+                    }
+                    
+
+                } catch (Exception e) {
+
+                    lable.setText("not searching");
+                }
+            }
+        });
+        
+        t.start();
     }
 
 }

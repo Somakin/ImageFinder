@@ -14,13 +14,13 @@ public class Starter extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        // TODO Auto-generated method stub
+       
         
 
-        Parent rootPanel = new ApplicationUI();
+        Parent rootPanel = new HBox1();
        
 
-        Scene scene = new Scene(rootPanel);
+        Scene scene = new Scene(rootPanel,300,100);
 
         stage.setScene(scene);
         stage.setResizable(true);

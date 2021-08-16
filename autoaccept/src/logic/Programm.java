@@ -12,46 +12,35 @@ import javax.imageio.ImageIO;
 
 public class Programm {
 
-    public void start() throws Exception {
-        // objects
-        Robot robot = new Robot();
+    BufferedImage bild, screenShot;
+    int[] a, b;
+  
 
+    public Programm() throws Exception {
+        // Objects
+        
         Manipulator manipulator = new Manipulator();
-        AutoAction aa = new AutoAction();
-        // import images
 
-        Path file = Paths.get("autoaccept/src/bilder/Accept.png");
-        BufferedImage bild = ImageIO.read(file.toFile());
+        Path file = Paths.get("autoaccept/src/bilder/Moon.png");
+        // create Images
+        this.bild = ImageIO.read(file.toFile());
 
-        BufferedImage screenShot = robot
-                .createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-
-        // convert to pixel array
-
-        int[] b = manipulator.pixels(bild);
-        int[] b2 = new int[bild.getWidth()];
-        for (int i = 0; i < b2.length; i++) {
-            b2[i] = b[i];
-        }
-
-        boolean bool = true;
-        while (bool) {
-
-            // screenshot aktualisieren
-            screenShot = robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-
-            // convert to pixel array
-            int[] a = manipulator.pixels(screenShot);
-
-            // check for Image
-            if (aa.klick(manipulator.compare(a, b, screenShot, bild))) {
-                System.out.println("bild gefunden");
-                bool = false;
-            }
-
-            
-
-        }
+        // convert to pixelarray
+        this.a = manipulator.pixels(bild);
 
     }
+
+    public boolean isEqual() throws Exception {
+        AutoAction aa = new AutoAction();
+        Manipulator manipulator = new Manipulator();
+        Robot robot = new Robot();
+
+        this.screenShot = robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        this.b = manipulator.pixels(screenShot);
+        
+        
+        return aa.klick(manipulator.compare(this.b, this.a, this.screenShot, this.bild));
+
+    }
+
 }
