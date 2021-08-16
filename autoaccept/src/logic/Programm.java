@@ -5,42 +5,45 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
 public class Programm {
 
-    BufferedImage bild, screenShot;
-    int[] a, b;
-  
+    BufferedImage bild, screenshot;
+    int[] scPixels, rPixels;
+
+
+
 
     public Programm() throws Exception {
-        // Objects
-        
+        // objects
+        Robot robot = new Robot();
         Manipulator manipulator = new Manipulator();
+        // images
+        this.screenshot = robot
+                .createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        this.bild = ImageIO.read(Paths.get("autoaccept/src/bilder/Moon.png").toFile());
+        // images to PixelArray
+        this.scPixels = manipulator.pixels(screenshot);
+        this.rPixels = manipulator.pixels(bild);
+        
+        
 
-        Path file = Paths.get("autoaccept/src/bilder/Moon.png");
-        // create Images
-        this.bild = ImageIO.read(file.toFile());
-
-        // convert to pixelarray
-        this.a = manipulator.pixels(bild);
+        
 
     }
+    public void run() throws Exception{
+        // objects
+        AutoAction autoaction = new AutoAction();
+        Compare compare = new Compare(screenshot, bild, scPixels, rPixels);
 
-    public boolean isEqual() throws Exception {
-        AutoAction aa = new AutoAction();
-        Manipulator manipulator = new Manipulator();
-        Robot robot = new Robot();
-
-        this.screenShot = robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-        this.b = manipulator.pixels(screenShot);
-        
-        
-        return aa.klick(manipulator.compare(this.b, this.a, this.screenShot, this.bild));
-
+        if(compare.isEqual()){
+            autoaction.klick(compare.getX(),compare.getY());
+            System.out.println("bild gefunden");
+        }
+        else{System.out.println("nicht gefunden");}
     }
 
 }

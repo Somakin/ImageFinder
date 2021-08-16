@@ -4,7 +4,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-import logic.Programm;
 
 public class HBox1 extends HBox {
 
@@ -63,10 +62,9 @@ public class HBox1 extends HBox {
         Thread t = new Thread(new Runnable() {
             public void run() {
                 try {
+                
                     
-                    Programm programm = new Programm();
-                    
-                    while (!programm.isEqual() && bool) {
+                    while (!false && bool) { //false ist wenn es das bild nicht erkannt hat
                         
                     }
                     
