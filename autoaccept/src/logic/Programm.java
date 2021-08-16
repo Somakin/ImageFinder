@@ -17,7 +17,10 @@ public class Programm {
     AutoAction autoaction;
     int[] scPixels, rPixels;
     int x, y;
-
+    boolean imagefound;
+public boolean getImagefound(){
+    return this.imagefound;
+}
     public Programm() throws Exception {
         // objects
         this.robot = new Robot();
@@ -34,6 +37,8 @@ public class Programm {
         this.x = 0;
         this.y = 0;
 
+        // boolean constructor
+        this.imagefound = false;
     }
 
     public void run() throws Exception {
@@ -46,10 +51,9 @@ public class Programm {
         if (compare.isEqual()) {
 
             autoaction.klick(this.x, this.y);
-            System.out.println("gefunden");
-        } else {
-            System.out.println("nicht gefunden");
-        }
-    }
+            imagefound = true;
 
+        }
+
+    }
 }

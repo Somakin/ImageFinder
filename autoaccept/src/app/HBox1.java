@@ -3,6 +3,7 @@ package app;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import logic.Programm;
 
 
 public class HBox1 extends HBox {
@@ -41,6 +42,7 @@ public class HBox1 extends HBox {
                 bool = true;
                 foo();
                 
+                
             } catch (Exception e) {
 
                 e.printStackTrace();
@@ -63,9 +65,12 @@ public class HBox1 extends HBox {
             public void run() {
                 try {
                 
-                    
-                    while (!false && bool) { //false ist wenn es das bild nicht erkannt hat
-                        
+                    Programm programm = new Programm();
+                    programm.run();
+                    while (!programm.getImagefound() && bool) { //false ist wenn es das bild nicht erkannt hat
+                    Programm weitererVersuch = new Programm();
+                    weitererVersuch.run();
+                    if(weitererVersuch.getImagefound()){ bool = false;}
                     }
                     
 
