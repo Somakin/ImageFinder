@@ -12,38 +12,44 @@ import javax.imageio.ImageIO;
 public class Programm {
 
     BufferedImage bild, screenshot;
+    Robot robot;
+    Manipulator manipulator;
+    AutoAction autoaction;
     int[] scPixels, rPixels;
-
-
-
+    int x, y;
 
     public Programm() throws Exception {
         // objects
-        Robot robot = new Robot();
-        Manipulator manipulator = new Manipulator();
+        this.robot = new Robot();
+        this.manipulator = new Manipulator();
+        this.autoaction = new AutoAction();
         // images
-        this.screenshot = robot
-                .createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        this.screenshot = robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
         this.bild = ImageIO.read(Paths.get("autoaccept/src/bilder/Moon.png").toFile());
         // images to PixelArray
         this.scPixels = manipulator.pixels(screenshot);
         this.rPixels = manipulator.pixels(bild);
-        
-        
 
-        
+        // int x,y initialize
+        this.x = 0;
+        this.y = 0;
 
     }
-    public void run() throws Exception{
+
+    public void run() throws Exception {
         // objects
-        AutoAction autoaction = new AutoAction();
         Compare compare = new Compare(screenshot, bild, scPixels, rPixels);
 
-        if(compare.isEqual()){
-            autoaction.klick(compare.getX(),compare.getY());
-            System.out.println("bild gefunden");
+        this.x = compare.getX();
+        this.y = compare.getY();
+
+        if (compare.isEqual()) {
+
+            autoaction.klick(this.x, this.y);
+            System.out.println("gefunden");
+        } else {
+            System.out.println("nicht gefunden");
         }
-        else{System.out.println("nicht gefunden");}
     }
 
 }
