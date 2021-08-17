@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 
 
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import logic.Programm;
 
 
@@ -31,9 +32,11 @@ public class HBox1 extends StackPane {
     }
 
     private void layoutControls() {
-
-        getChildren().addAll(button1, button2, lable, button3);
-        setAlignment(Pos.CENTER);
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(button1, button2, lable, button3);
+        vbox.setAlignment(Pos.CENTER);
+        getChildren().addAll(vbox);
+        
     }
 
     private void initializeControls() {

@@ -20,7 +20,8 @@ public class Starter extends Application{
 
         //layout
         stage.setTitle("League Q-Accepter");
-        Scene scene = new Scene(hBox1,300,200);
+        stage.setWidth(300);
+        Scene scene = new Scene(hBox1);
         
 
         //start
