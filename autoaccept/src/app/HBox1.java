@@ -2,15 +2,17 @@ package app;
 
 
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-import javafx.scene.layout.HBox;
+
+import javafx.scene.layout.StackPane;
 import logic.Programm;
 
 
 
-public class HBox1 extends HBox {
+public class HBox1 extends StackPane {
 
     static volatile boolean bool = true;
 
@@ -31,6 +33,7 @@ public class HBox1 extends HBox {
     private void layoutControls() {
 
         getChildren().addAll(button1, button2, lable, button3);
+        setAlignment(Pos.CENTER);
     }
 
     private void initializeControls() {

@@ -15,13 +15,15 @@ public class Starter extends Application{
     @Override
     public void start(Stage stage) throws Exception {
        
+        //init scene
+        HBox1 hBox1 = new HBox1();
+
+        //layout
+        stage.setTitle("League Q-Accepter");
+        Scene scene = new Scene(hBox1,300,200);
         
 
-        Parent rootPanel = new HBox1();
-       
-
-        Scene scene = new Scene(rootPanel,300,100);
-
+        //start
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
