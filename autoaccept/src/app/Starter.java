@@ -1,7 +1,6 @@
 package app;
 
 import javafx.application.Application;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -16,7 +15,7 @@ public class Starter extends Application{
     public void start(Stage stage) throws Exception {
        
         //init scene
-        HBox1 hBox1 = new HBox1();
+        MainPane hBox1 = new MainPane();
 
         //layout
         stage.setTitle("League Q-Accepter");

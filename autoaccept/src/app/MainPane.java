@@ -13,7 +13,7 @@ import logic.Programm;
 
 
 
-public class HBox1 extends StackPane {
+public class MainPane extends StackPane {
 
     static volatile boolean bool = true;
 
@@ -24,7 +24,7 @@ public class HBox1 extends StackPane {
 
   
 
-    public HBox1() {
+    public MainPane() {
 
         initializeControls();
         layoutControls();
