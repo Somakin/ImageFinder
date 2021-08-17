@@ -77,10 +77,10 @@ public class HBox1 extends HBox {
             public void run() {
                 try {
 
-                    Programm programm = new Programm("Moon.png");
+                    Programm programm = new Programm("InQ.png");
                     
                     while (!programm.getImagefound() && bool) {
-                        Programm weitererVersuch = new Programm("Moon.png");
+                        Programm weitererVersuch = new Programm("InQ.png");
                         weitererVersuch.run();
                         if (weitererVersuch.getImagefound()) {
                             bool = false;
