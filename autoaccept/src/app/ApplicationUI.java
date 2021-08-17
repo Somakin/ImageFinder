@@ -7,7 +7,7 @@ public class ApplicationUI extends VBox{
     
 
     HBox1 HBox1;
-    HBox2 Title;
+ 
 
     public ApplicationUI(){
 
@@ -20,13 +20,13 @@ public class ApplicationUI extends VBox{
 
     private void layoutControls() {
 
-        getChildren().addAll(Title,HBox1);
+        getChildren().addAll(HBox1);
     }
 
     private void initializeControls() {
 
         HBox1 = new HBox1();
-        Title = new HBox2();
+       
 
     }
 }
