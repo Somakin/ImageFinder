@@ -18,9 +18,19 @@ public class Programm {
     int[] scPixels, rPixels;
     int x, y;
     boolean imagefound;
-public boolean getImagefound(){
-    return this.imagefound;
-}
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public boolean getImagefound() {
+        return this.imagefound;
+    }
+
     public Programm(String referenzBild) throws Exception {
         // objects
         this.robot = new Robot();
@@ -28,25 +38,19 @@ public boolean getImagefound(){
         this.autoaction = new AutoAction();
         // images
         this.screenshot = robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-        this.bild = ImageIO.read(Paths.get("autoaccept/src/bilder/"+referenzBild).toFile());
+        this.bild = ImageIO.read(Paths.get("autoaccept/src/bilder/" + referenzBild).toFile());
         // images to PixelArray
         this.scPixels = manipulator.pixels(screenshot);
         this.rPixels = manipulator.pixels(bild);
 
         // int x,y initialize
-        this.x = 0;
-        this.y = 0;
-
-        // boolean constructor
-        this.imagefound = false;
-    }
-    public void initialize() throws Exception{
-        // objects
         Compare compare = new Compare(screenshot, bild, scPixels, rPixels);
 
         this.x = compare.getX();
         this.y = compare.getY();
 
+        // boolean constructor
+        this.imagefound = false;
     }
 
     public void run() throws Exception {
@@ -64,5 +68,5 @@ public boolean getImagefound(){
         }
 
     }
-    
+
 }
