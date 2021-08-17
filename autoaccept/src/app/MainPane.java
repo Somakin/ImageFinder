@@ -83,10 +83,10 @@ public class MainPane extends StackPane {
             public void run() {
                 try {
 
-                    Programm programm = new Programm("InQ.png");
+                    Programm programm = new Programm("Accept.png");
                     
                     while (!programm.getImagefound() && bool) {
-                        Programm weitererVersuch = new Programm("InQ.png");
+                        Programm weitererVersuch = new Programm("Accept.png");
                         weitererVersuch.run();
                         if (weitererVersuch.getImagefound()) {
                             bool = false;
