@@ -6,76 +6,76 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.Programm;
 
-
-
 public class MainPane extends StackPane {
 
     static volatile boolean bool = true;
+    static volatile boolean gamefound = false;
 
     public Button button1;
     public Button button2;
-    public Label lable;
+    public Label label;
     public Button button3;
-
-  
+    public BooleanChangeTest isqfound;
+   
 
     public MainPane() {
 
-        initializeControls();
-        layoutControls();
-
-    }
-
-    private void layoutControls() {
-        VBox vbox = new VBox();
-        vbox.getChildren().addAll(button1, button2, lable, button3);
-        vbox.setAlignment(Pos.CENTER);
-        getChildren().addAll(vbox);
         
-    }
 
-    private void initializeControls() {
         
+
+        // init
+
         button1 = new Button("Start");
         button2 = new Button("Stop");
-        lable = new Label("not searching");
+        label = new Label("not searching");
         button3 = new Button("Exit");
-    
+        isqfound = new BooleanChangeTest(gamefound);
         
 
+        //logic
         button1.setOnAction(actionEvent -> {
-            
-                lable.setText("searching");
-                bool = true;
 
-                try {
-                    foo();
-                } catch (Exception e) {
-                    
-                    e.printStackTrace();
-                }
-                
+            label.setText("searching");
+            bool = true;
+
+            try {
+                foo();
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
 
         });
-     
 
         button2.setOnAction(abbruch -> {
-            lable.setText("stopped searching");
+            label.setText("stopped searching");
             bool = false;
         });
         button3.setOnAction(exit -> {
             System.exit(0);
         });
+        isqfound.addBooleanChangeListener(listen->{
+            isqfound.setFlag(gamefound);
+            if(isqfound.getFlag()){
+                System.exit(1);
+            }
+        });
         
         
-            
-       
+        
+        // layout
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(button1, button2, label, button3);
+        vbox.setAlignment(Pos.CENTER);
+        getChildren().addAll(vbox);
     }
+
+      
 
     public void foo() throws Exception {
         Thread t2 = new Thread(new Runnable() {
@@ -84,17 +84,17 @@ public class MainPane extends StackPane {
                 try {
 
                     Programm programm = new Programm("Accept.png");
-                    
+
                     while (!programm.getImagefound() && bool) {
                         Programm weitererVersuch = new Programm("Accept.png");
                         weitererVersuch.run();
                         if (weitererVersuch.getImagefound()) {
                             bool = false;
+                            gamefound = true;
                             
                         }
                     }
-                    
-                    
+
                 } catch (Exception e) {
 
                 }
@@ -107,5 +107,3 @@ public class MainPane extends StackPane {
     }
 
 }
-
-

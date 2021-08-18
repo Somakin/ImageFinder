@@ -65,6 +65,7 @@ public class Programm {
             autoaction.klick(this.x, this.y);
             imagefound = true;
 
+            
         }
 
     }
