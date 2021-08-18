@@ -13,13 +13,13 @@ import logic.Programm;
 public class MainPane extends StackPane {
 
     static volatile boolean bool = true;
-    static volatile boolean gamefound = false;
+
 
     public Button button1;
     public Button button2;
     public Label label;
     public Button button3;
-    public BooleanChangeTest isqfound;
+
    
 
     public MainPane() {
@@ -34,7 +34,7 @@ public class MainPane extends StackPane {
         button2 = new Button("Stop");
         label = new Label("not searching");
         button3 = new Button("Exit");
-        isqfound = new BooleanChangeTest(gamefound);
+      
         
 
         //logic
@@ -59,12 +59,7 @@ public class MainPane extends StackPane {
         button3.setOnAction(exit -> {
             System.exit(0);
         });
-        isqfound.addBooleanChangeListener(listen->{
-            isqfound.setFlag(gamefound);
-            if(isqfound.getFlag()){
-                System.exit(1);
-            }
-        });
+       
         
         
         
@@ -90,7 +85,7 @@ public class MainPane extends StackPane {
                         weitererVersuch.run();
                         if (weitererVersuch.getImagefound()) {
                             bool = false;
-                            gamefound = true;
+                            
                             
                         }
                     }
