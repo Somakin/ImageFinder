@@ -15,13 +15,14 @@ public class Starter extends Application {
     public void start(Stage stage) throws Exception {
 
         // init scene
-        MainPane hBox1 = new MainPane();
+        MainPane mainPane = new MainPane();
 
         // layout
         stage.setTitle("League Q-Accepter");
         stage.setWidth(300);
+        stage.setHeight(200);
 
-        Scene scene = new Scene(hBox1);
+        Scene scene = new Scene(mainPane);
 
         // start
         stage.setScene(scene);

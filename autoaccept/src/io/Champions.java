@@ -13,15 +13,14 @@ import java.util.Scanner;
 
 public class Champions {
 
-    private static HashSet<String> allChampions;
-    private static List<String> allChampList;
+    private  HashSet<String> allChampions;
+    private List<String> allChampList;
 
     public Champions() throws Exception {
 
         String content;
         String[] line;
         allChampions = new HashSet<String>();
-        
 
         Scanner scan = new Scanner(Paths.get("autoaccept\\src\\io\\AllChampions.txt").toFile());
 
@@ -33,8 +32,12 @@ public class Champions {
 
     }
 
-    public List<String> getAllChampions() {
+    public List<String> getAllChampionsList() {
         return allChampList;
+    }
+
+    public HashSet<String> getAllChampionsHashSet() {
+        return allChampions;
     }
 
     public void addChamp(String champ) throws IOException {
@@ -53,11 +56,12 @@ public class Champions {
             for (String string : allChampList) {
                 bw.write(string + ";");
             }
-            
+
             // close connections
             bw.close();
             fw.close();
+        } else {
+            System.out.println("nicht möglich");
         }
-        else{System.out.println("nicht möglich");}
     }
 }
