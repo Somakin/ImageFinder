@@ -5,6 +5,11 @@ import java.awt.image.PixelGrabber;
 
 public class Manipulator {
 
+    
+
+    
+
+
     public int[] pixels(BufferedImage image) {
         PixelGrabber grabber;
         int[] pixels = new int[image.getWidth() * image.getHeight()];
@@ -17,7 +22,7 @@ public class Manipulator {
         return pixels;
     }
 
-    public int[] compare(int[] scPixels, int[] rPixels, BufferedImage sc, BufferedImage r) {
+    public int[] compare(int[] scPixels, int[] rPixels, BufferedImage sc, BufferedImage r, double fehlerinprozent) {
         int[] koordinaten = new int[2];
 
         int xlage = 0;
@@ -25,7 +30,7 @@ public class Manipulator {
 
         int richtige = 0;
         int fehler = 0;
-        double maxfehler = (int) rPixels.length * 0.1; // zugelassene Fehler in %
+        double maxfehler = (int) rPixels.length * fehlerinprozent /100; // zugelassene Fehler in %
 
         boolean istgleich = false;
 

@@ -17,14 +17,14 @@ public class Compare {
         return y;
     }
 
-    public Compare(BufferedImage sc, BufferedImage r, int[] scPixel, int[] rPixel) throws IOException { // Paths.get("autoaccept/src/bilder/Moon.png")
+    public Compare(BufferedImage sc, BufferedImage r, int[] scPixel, int[] rPixel, double fehlerinprozent) throws IOException { // Paths.get("autoaccept/src/bilder/Moon.png")
         this.sc = sc;
         this.r = r;
         this.scPixel = scPixel;
         this.rPixel = rPixel;
 
         Manipulator manipulator = new Manipulator();
-        int[] koordinaten = manipulator.compare(scPixel, rPixel, sc, r);
+        int[] koordinaten = manipulator.compare(scPixel, rPixel, sc, r,fehlerinprozent);
         this.x = koordinaten[0];
         this.y = koordinaten[1];
     }

@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
-public class Programm {
+public class ImageFinder {
 
     BufferedImage bild, screenshot;
     Robot robot;
@@ -17,7 +17,8 @@ public class Programm {
     AutoAction autoaction;
     int[] scPixels, rPixels;
     int x, y;
-    boolean imagefound;
+    double maxfehler_in_Prozent;
+    private boolean imagefound;
 
     public int getX() {
         return this.x;
@@ -31,7 +32,11 @@ public class Programm {
         return this.imagefound;
     }
 
-    public Programm(String referenzBild) throws Exception {
+    public void setImagefound(boolean bool) {
+        this.imagefound = bool;
+    }
+
+    public ImageFinder(String referenzBild,double maxfehler_in_Prozent) throws Exception {
         // objects
         this.robot = new Robot();
         this.manipulator = new Manipulator();
@@ -42,9 +47,11 @@ public class Programm {
         // images to PixelArray
         this.scPixels = manipulator.pixels(screenshot);
         this.rPixels = manipulator.pixels(bild);
+        // fehlerquote setzen
+
 
         // int x,y initialize
-        Compare compare = new Compare(screenshot, bild, scPixels, rPixels);
+        Compare compare = new Compare(screenshot, bild, scPixels, rPixels,maxfehler_in_Prozent);
 
         this.x = compare.getX();
         this.y = compare.getY();
@@ -55,19 +62,19 @@ public class Programm {
 
     public void run() throws Exception {
         // objects
-        Compare compare = new Compare(screenshot, bild, scPixels, rPixels);
+        
+            Compare compare = new Compare(screenshot, bild, scPixels, rPixels,maxfehler_in_Prozent);
 
-        this.x = compare.getX();
-        this.y = compare.getY();
+            this.x = compare.getX();
+            this.y = compare.getY();
 
-        if (compare.isEqual()) {
+            if (compare.isEqual()) {
 
-            autoaction.klick(this.x, this.y);
-            imagefound = true;
+                autoaction.klick(this.x, this.y);
+                imagefound = true;
 
-            
-        }
-
+            }
+        
     }
 
 }

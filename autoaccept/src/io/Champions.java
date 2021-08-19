@@ -32,9 +32,9 @@ public class Champions {
 
     }
 
-    public List<String> getAllChampionsList() {
-        return allChampList;
-    }
+    // public List<String> getAllChampionsList() {
+    //     return allChampList;
+    // }
 
     public HashSet<String> getAllChampionsHashSet() {
         return allChampions;

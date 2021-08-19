@@ -15,12 +15,14 @@ public class BottomPart extends VBox {
     public Button enter;
     public TextField championfield;
     public Label beschriftung;
-    public Label champLabel;
+    public Label champion;
+    public static Label champLabel;
 
     public BottomPart() {
         // init
-        beschriftung = new Label("Champion präferenz");
-        champLabel = new Label("champ not yet chosen");
+        beschriftung = Beschriftungen.champion_präferenz;
+        champLabel = Beschriftungen.none;
+        champion = Beschriftungen.champion;
         championfield = new TextField();
         enter = new Button("lock");
         inChampSelect = false;
@@ -28,14 +30,17 @@ public class BottomPart extends VBox {
         enter.setOnAction(event -> {
             try {
                 Champions champions = new Champions();
-                
-                if (champions.getAllChampionsHashSet().contains(championfield.getText())) {
-                champLabel.setText("chosen Champ: " + championfield.getText());
-                championfield.clear();
 
+                if (champions.getAllChampionsHashSet().contains(championfield.getText())) {
+                    champLabel.setText(championfield.getText());
+                    champion.setText(Beschriftungen.champion.getText());
+                    championfield.clear();
+
+                } else {
+                    champLabel.setText(Beschriftungen.öb_du_behenderet_besch_hani_gfrogt.getText());
+                    champion.setText("");
                 }
-                else{champLabel.setText("not a Champion");}
-                
+
             } catch (Exception e) {
 
                 e.printStackTrace();
@@ -47,7 +52,10 @@ public class BottomPart extends VBox {
         HBox hbox = new HBox();
         hbox.getChildren().addAll(championfield, enter);
         hbox.setAlignment(Pos.BASELINE_CENTER);
-        getChildren().addAll(beschriftung, hbox, champLabel);
+        HBox hbox2 = new HBox();
+        hbox2.getChildren().addAll(champion, champLabel);
+        hbox2.setAlignment(Pos.BASELINE_CENTER);
+        getChildren().addAll(beschriftung, hbox, hbox2);
         setAlignment(Pos.BOTTOM_CENTER);
     }
 
