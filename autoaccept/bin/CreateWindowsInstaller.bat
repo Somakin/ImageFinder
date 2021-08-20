@@ -1,0 +1,2 @@
+jlink --no-header-files --compress=2 --strip-debug -p ./jmods/ --add-modules javafx.controls,javafx.base,javafx.graphics --output ./JRE
+jpackage --type msi --input ./jarfile --main-jar ImageFinder.jar --main-class msi --runtime-image ./JRE/ --win-shortcut --dest ./ --name Autoaccept

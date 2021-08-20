@@ -79,10 +79,10 @@ public class TopPart extends HBox {
                 try {
                     while (!ingame) {
                         if ((!gestoppt && !(new ImageFinder("inChampSelect.png", 10).getImagefound()))
-                                && !(new ImageFinder("Moon.png", 10).getImagefound())
+                                && !(new ImageFinder("Accept.png", 10).getImagefound())
                                 || !(new ImageFinder("inChampSelect.png", 10).getImagefound())) {
                             inChampSelect = false;
-                            acceptQ = new ImageFinder("Moon.png", 10);
+                            acceptQ = new ImageFinder("Accept.png", 10);
                             if (acceptQ.getImagefound()) {
                                 aa.klick(acceptQ.getX(), acceptQ.getY());
                                 inChampSelect = true;

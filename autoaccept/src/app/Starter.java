@@ -32,3 +32,8 @@ public class Starter extends Application {
     }
 
 }
+class msi{
+    public static void main(String[] args) {
+        Application.launch(Starter.class);
+    }
+}
