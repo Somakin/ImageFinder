@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +23,9 @@ public class Champions {
         String[] line;
         allChampions = new HashSet<String>();
 
-        Scanner scan = new Scanner(Paths.get("autoaccept\\src\\io\\AllChampions.txt").toFile());
+        Scanner scan = new Scanner(Champions.class.getClassLoader().getResource("io\\AllChampions.txt").toURI().toURL().openStream());
+        
+
 
         content = scan.nextLine();
         line = content.split(";");
@@ -32,20 +35,19 @@ public class Champions {
 
     }
 
-    // public List<String> getAllChampionsList() {
-    //     return allChampList;
-    // }
+   
 
     public HashSet<String> getAllChampionsHashSet() {
         return allChampions;
     }
 
-    public void addChamp(String champ) throws IOException {
+    public void addChamp(String champ) throws IOException,URISyntaxException {
         // check if champ ist allready there
         if (!allChampions.contains(champ)) {
             allChampions.add(champ);
             // imports
-            File champions = Paths.get("autoaccept\\src\\io\\AllChampions.txt").toFile();
+            File champions = new File( Champions.class.getClassLoader().getResource("io\\AllChampions.txt").toURI());
+            //File champions = Paths.get("autoaccept\\src\\io\\AllChampions.txt").toFile();
             champions.createNewFile();
             FileWriter fw = new FileWriter(champions);
             BufferedWriter bw = new BufferedWriter(fw);

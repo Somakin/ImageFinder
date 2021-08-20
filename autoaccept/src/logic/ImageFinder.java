@@ -44,7 +44,7 @@ public class ImageFinder {
         this.autoaction = new AutoAction();
         // images
         this.screenshot = robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-        this.bild = ImageIO.read(Paths.get("autoaccept/src/bilder/" + referenzBild).toFile());
+        this.bild = ImageIO.read(ImageFinder.class.getClassLoader().getResource("bilder/" + referenzBild));
         // images to PixelArray
         this.scPixels = manipulator.pixels(screenshot);
         this.rPixels = manipulator.pixels(bild);
