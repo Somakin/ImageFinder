@@ -9,6 +9,12 @@ import javafx.scene.layout.HBox;
 import logic.AutoAction;
 import logic.ImageFinder;
 
+import java.awt.event.*;
+
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Clipboard;
 public class TopPart extends HBox {
 
     public Button button1;
@@ -68,7 +74,9 @@ public class TopPart extends HBox {
 
             public void run() {
 
-                AutoAction bot = new AutoAction();
+                AutoAction aa = new AutoAction();
+                
+
                 ImageFinder acceptQ;
                 try {
                     while ((!gestoppt && !(new ImageFinder("inChampSelect.png", 10).getImagefound()))
@@ -76,7 +84,7 @@ public class TopPart extends HBox {
                             || !(new ImageFinder("inChampSelect.png", 10).getImagefound())) {
                         acceptQ = new ImageFinder("Moon.png", 10);
                         if (acceptQ.getImagefound()) {
-                            bot.klick(acceptQ.getX(), acceptQ.getY());
+                            aa.klick(acceptQ.getX(), acceptQ.getY());
                         }
 
                     }
@@ -84,8 +92,9 @@ public class TopPart extends HBox {
                     ImageFinder champselect = new ImageFinder("inChampSelect.png", 10);
                     trueX = champselect.getX();
                     trueY = champselect.getY();
-                    bot.klick((int)trueX -270,(int)trueY);
+                    aa.klick((int)trueX -270,(int)trueY);
                     String text = "I PICK: " + BottomPart.champLabel.getText();
+                    aa.writeAndEnter(text);
                     System.out.println(text);
 
                 } catch (Exception e) {
