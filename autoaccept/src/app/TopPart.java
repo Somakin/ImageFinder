@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.HBox;
+import logic.AutoAction;
 import logic.ImageFinder;
 
 public class TopPart extends HBox {
@@ -14,6 +15,8 @@ public class TopPart extends HBox {
     public Button button2;
     public static Label label;
     public Button button3;
+
+    public static volatile double trueX, trueY;
 
     boolean gestoppt;
 
@@ -26,6 +29,9 @@ public class TopPart extends HBox {
         label = Beschriftungen.not_Searching;
         button3 = new Button("Exit");
         gestoppt = true;
+        trueX = 0;
+        trueY = 0;
+
         // logic
 
         button1.setOnAction(actionEvent -> {
@@ -62,28 +68,26 @@ public class TopPart extends HBox {
 
             public void run() {
 
-                boolean gefunden = false;
-                while (!gefunden && !gestoppt) {
-                    ImageFinder accept;
-                    try {
-                        accept = new ImageFinder("Moon.png",10);
-                        accept.run();
-                        if (accept.getImagefound()) {
-                            gefunden = true;
-                        }
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-                    }
-
-                }
-
-                System.out.println(BottomPart.champLabel.getText());
-
-                // go to next stage: lock champion
-                ImageFinder select;
+                AutoAction bot = new AutoAction();
+                ImageFinder acceptQ;
                 try {
-                    
+                    while ((!gestoppt && !(new ImageFinder("inChampSelect.png", 10).getImagefound()))
+                            && !(new ImageFinder("Moon.png", 10).getImagefound())
+                            || !(new ImageFinder("inChampSelect.png", 10).getImagefound())) {
+                        acceptQ = new ImageFinder("Moon.png", 10);
+                        if (acceptQ.getImagefound()) {
+                            bot.klick(acceptQ.getX(), acceptQ.getY());
+                        }
+
+                    }
+                    // go to next stage: lock champion
+                    ImageFinder champselect = new ImageFinder("inChampSelect.png", 10);
+                    trueX = champselect.getX();
+                    trueY = champselect.getY();
+                    bot.klick((int)trueX -270,(int)trueY);
+                    String text = "I PICK: " + BottomPart.champLabel.getText();
+                    System.out.println(text);
+
                 } catch (Exception e) {
 
                     e.printStackTrace();

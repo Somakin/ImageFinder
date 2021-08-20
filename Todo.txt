@@ -1,0 +1,4 @@
+todo:
+- datenbank pref picks, bans
+- einstellung blind, aram oder draft
+- eventuell absolute position ab phase 2

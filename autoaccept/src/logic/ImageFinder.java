@@ -19,6 +19,7 @@ public class ImageFinder {
     int x, y;
     double maxfehler_in_Prozent;
     private boolean imagefound;
+    private double fehler;
 
     public int getX() {
         return this.x;
@@ -36,7 +37,7 @@ public class ImageFinder {
         this.imagefound = bool;
     }
 
-    public ImageFinder(String referenzBild,double maxfehler_in_Prozent) throws Exception {
+    public ImageFinder(String referenzBild, double maxfehler_in_Prozent) throws Exception {
         // objects
         this.robot = new Robot();
         this.manipulator = new Manipulator();
@@ -47,34 +48,17 @@ public class ImageFinder {
         // images to PixelArray
         this.scPixels = manipulator.pixels(screenshot);
         this.rPixels = manipulator.pixels(bild);
-        // fehlerquote setzen
 
-
+        // fehler
+        this.fehler = maxfehler_in_Prozent;
         // int x,y initialize
-        Compare compare = new Compare(screenshot, bild, scPixels, rPixels,maxfehler_in_Prozent);
+        Compare compare = new Compare(screenshot, bild, scPixels, rPixels, fehler);
 
         this.x = compare.getX();
         this.y = compare.getY();
 
         // boolean constructor
-        this.imagefound = false;
-    }
-
-    public void run() throws Exception {
-        // objects
-        
-            Compare compare = new Compare(screenshot, bild, scPixels, rPixels,maxfehler_in_Prozent);
-
-            this.x = compare.getX();
-            this.y = compare.getY();
-
-            if (compare.isEqual()) {
-
-                autoaction.klick(this.x, this.y);
-                imagefound = true;
-
-            }
-        
+        this.imagefound = compare.isEqual();
     }
 
 }
