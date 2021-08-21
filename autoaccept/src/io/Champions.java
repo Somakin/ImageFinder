@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,8 +23,9 @@ public class Champions {
         String[] line;
         allChampions = new HashSet<String>();
 
-        Scanner scan = new Scanner(Champions.class.getClassLoader().getResource("io\\AllChampions.txt").toURI().toURL().openStream());
+        Scanner scan = new Scanner(Champions.class.getClassLoader().getResourceAsStream("io\\AllChampions.txt"));
         
+        //Scanner scan = new Scanner(Paths.get("autoaccept\\src\\io\\AllChampions.txt").toFile());
 
 
         content = scan.nextLine();

@@ -1,0 +1,2 @@
+Jhin,Ashe,Ezreal
+Zed,Garen,Yasuo
