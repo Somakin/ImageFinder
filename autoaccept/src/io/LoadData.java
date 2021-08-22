@@ -14,7 +14,6 @@ import java.nio.file.Files;
 
 public class LoadData {
 
-
     public List<String> getPreferences() throws IOException, URISyntaxException {
 
         File prefs = new File(Champions.class.getClassLoader().getResource("io\\Preferences.txt").toURI());

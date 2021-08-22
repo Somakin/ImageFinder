@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import logic.AutoAction;
 import logic.ImageFinder;
 
-
 public class TopPart extends HBox {
 
     public Button button1;
@@ -40,10 +39,11 @@ public class TopPart extends HBox {
 
         button1.setOnAction(actionEvent -> {
             gestoppt = false;
+            inChampSelect = false;
             label.setText(Beschriftungen.searching.getText());
 
             try {
-                
+
                 search();
 
             } catch (Exception e) {
@@ -78,16 +78,13 @@ public class TopPart extends HBox {
                 ImageFinder acceptQ;
                 try {
                     while (!ingame) {
-                        if ((!gestoppt &&( !(new ImageFinder("inChampSelect.png", 10).getImagefound())
-                                || !(new ImageFinder("inChampSelect.png", 10).getImagefound())))) {
-                            inChampSelect = false;
+                        if (!gestoppt && !new ImageFinder("inChampSelect.png", 10).getImagefound()) {
                             acceptQ = new ImageFinder("Accept.png", 10);
                             if (acceptQ.getImagefound()) {
                                 aa.klick(acceptQ.getX(), acceptQ.getY());
-                                inChampSelect = true;
                             }
 
-                        } else if ((new ImageFinder("inChampSelect.png", 10).getImagefound())) {
+                        } else if (new ImageFinder("inChampSelect.png", 10).getImagefound() && !inChampSelect) {
 
                             // go to next stage: lock champion
                             ImageFinder champselect = new ImageFinder("inChampSelect.png", 10);
@@ -95,7 +92,7 @@ public class TopPart extends HBox {
                             trueY = champselect.getY();
                             // write in chat
                             aa.klick((int) trueX - 270, (int) trueY);
-                            String text = "I PICK: " + BottomPart.champLabel.getText();
+                            String text = "FUCK YALL, I PICK " + BottomPart.champLabel.getText();
                             aa.writeAndEnter(text);
                             // search champ
                             aa.klick((int) trueX + 370, (int) trueY - 580);
@@ -106,8 +103,14 @@ public class TopPart extends HBox {
                             // lock
                             Thread.sleep(500);
                             aa.klick((int) trueX + 235, (int) trueY - 80);
-                            // backup if q gets doged
-                            
+
+                            // not reapeating whil in champ select
+                            inChampSelect = true;
+                            // check if q doesn't get dogged
+                            if (true) { // image for in game
+                                System.exit(0);
+                            }
+
                         }
                     }
 
