@@ -14,25 +14,18 @@ import java.nio.file.Files;
 
 public class LoadData {
 
-    String preferences;
-    String bans;
 
-    public LoadData() throws Exception {
+    public List<String> getPreferences() throws IOException, URISyntaxException {
 
         File prefs = new File(Champions.class.getClassLoader().getResource("io\\Preferences.txt").toURI());
+
+        return Arrays.stream(Files.readString(prefs.toPath()).split(",")).collect(Collectors.toList());
+    }
+
+    public List<String> getBans() throws IOException, URISyntaxException {
         File bans = new File(Champions.class.getClassLoader().getResource("io\\Bans.txt").toURI());
 
-        this.preferences = Files.readString(prefs.toPath());
-        this.bans = Files.readString(bans.toPath());
-
-    }
-
-    public List<String> getPreferences() {
-        return Arrays.stream(preferences.split(",")).collect(Collectors.toList());
-    }
-
-    public List<String> getBans() {
-        return Arrays.stream(bans.split(",")).collect(Collectors.toList());
+        return Arrays.stream(Files.readString(bans.toPath()).split(",")).collect(Collectors.toList());
     }
 
     public void chamgePref(String newprefs) throws IOException, URISyntaxException {
@@ -41,9 +34,6 @@ public class LoadData {
         prefs.delete();
         prefs.createNewFile();
         Files.writeString(prefs.toPath(), newprefs);
-        
-
-
     }
 
 }

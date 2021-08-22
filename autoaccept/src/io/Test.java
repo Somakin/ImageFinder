@@ -5,7 +5,7 @@ public class Test {
 
         LoadData load = new LoadData();
 
-        load.chamgePref("a,b,c");
+        load.chamgePref("Jhin,Ashe,Ezreal");
 
         System.out.println(load.getPreferences());
         System.out.println(load.getBans());
