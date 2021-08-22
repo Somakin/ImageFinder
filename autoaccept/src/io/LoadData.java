@@ -1,84 +1,49 @@
 package io;
 
-import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-import java.io.BufferedWriter;
+import java.util.stream.Collectors;
+
 import java.io.File;
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-
+import java.nio.file.Files;
 
 public class LoadData {
 
-    private List<String> preferences;
-    private List<String> bans;
+    String preferences;
+    String bans;
 
     public LoadData() throws Exception {
 
-        String pickpref;
-        String banpref;
-
-        String[] picksArray, bansArray;
-
-        preferences = new ArrayList<>();
-        bans = new ArrayList<>();
-
-        Scanner scan = new Scanner(
-                Champions.class.getClassLoader().getResource("io\\Preferences.txt").toURI().toURL().openStream());
-
-        pickpref = scan.nextLine();
-        banpref = scan.nextLine();
-        picksArray = pickpref.split(";");
-        for (String string : picksArray) {
-            preferences.add(string);
-        }
-
-        bansArray = banpref.split(";");
-        for (String string : bansArray) {
-            bans.add(string);
-        }
-
-    }
-    public List<String> getPreferences(){
-        return this.preferences;
-    }
-    public List<String> getBans(){
-        return this.bans;
-    }
-    
-    public void chamgePref(String pref) throws IOException, URISyntaxException {
-
-        // old data
-        Scanner scan = new Scanner(
-                Champions.class.getClassLoader().getResourceAsStream("io\\Preferences.txt"));
-        
-        String oldData = scan.nextLine().trim();
-        String[] oldDataString = oldData.split(",");
-        // imports
         File prefs = new File(Champions.class.getClassLoader().getResource("io\\Preferences.txt").toURI());
+        File bans = new File(Champions.class.getClassLoader().getResource("io\\Bans.txt").toURI());
+
+        this.preferences = Files.readString(prefs.toPath());
+        this.bans = Files.readString(bans.toPath());
+
+    }
+
+    public List<String> getPreferences() {
+        return Arrays.stream(preferences.split(",")).collect(Collectors.toList());
+    }
+
+    public List<String> getBans() {
+        return Arrays.stream(bans.split(",")).collect(Collectors.toList());
+    }
+
+    public void chamgePref(String newprefs) throws IOException, URISyntaxException {
+
+        File prefs = new File(Champions.class.getClassLoader().getResource("io\\Preferences.txt").toURI());
+        prefs.delete();
         prefs.createNewFile();
-        FileWriter fw = new FileWriter(prefs);
-        BufferedWriter bw = new BufferedWriter(fw);
-        // logic
+        Files.writeString(prefs.toPath(), newprefs);
+        
 
-        String[] eingabe = pref.trim().split(",");
 
-        for (String string : eingabe) {
-            bw.write(string + ",");
-        }
-        bw.newLine();
-        for (String string : oldDataString) {
-            bw.write(string + ",");
-        }
-
-        // close connections
-        bw.close();
-        fw.close();
     }
 
 }

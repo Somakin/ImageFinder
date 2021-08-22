@@ -78,9 +78,8 @@ public class TopPart extends HBox {
                 ImageFinder acceptQ;
                 try {
                     while (!ingame) {
-                        if ((!gestoppt && !(new ImageFinder("inChampSelect.png", 10).getImagefound()))
-                                && !(new ImageFinder("Accept.png", 10).getImagefound())
-                                || !(new ImageFinder("inChampSelect.png", 10).getImagefound())) {
+                        if ((!gestoppt &&( !(new ImageFinder("inChampSelect.png", 10).getImagefound())
+                                || !(new ImageFinder("inChampSelect.png", 10).getImagefound())))) {
                             inChampSelect = false;
                             acceptQ = new ImageFinder("Accept.png", 10);
                             if (acceptQ.getImagefound()) {
@@ -108,13 +107,7 @@ public class TopPart extends HBox {
                             Thread.sleep(500);
                             aa.klick((int) trueX + 235, (int) trueY - 80);
                             // backup if q gets doged
-                            while ((new ImageFinder("inChampSelect.png", 10).getImagefound())) {//TODO: muss anderes bild sein
-                                if(!(new ImageFinder("inChampSelect.png", 10).getImagefound()))//TODO: anders bild seon
-                                Thread.sleep(2000);
-                                if(!(new ImageFinder("inQ.png", 10).getImagefound())){
-                                    System.exit(0);
-                                }
-                            }
+                            
                         }
                     }
 
